@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>WeatherMap</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+<div style="text-align: center;">
+
+    <strong th:text="${userObject.isLogin() ? 'Witaj zalogowany userze' : 'Witaj niezalogowany userze'}"></strong>
+    <strong th:if="${userObject.isLogin()}"
+            th:text="'Twoj username to: ' + ${userObject.getUserEntity().getUsername()}"></strong>
+
+    <br/><br/>
+    <div style="text-align: center; margin-top: 200px; font-size: 80px">
+        <font color="#228B22">Welcome at WeatherMap</font>
+    </div>
+
+    <div style="text-align: center; width: 400px; margin-top: 10px; margin-left: auto; margin-right: auto">
+        <div class="btn-group" style="text-align: center">
+
+            <button onclick="javascript:location.href = '/register'" class="btn btn-info">User Registration</button>
+            <button onclick="javascript:location.href = '/login'" class="btn btn-success">Login</button>
+            <button onclick="javascript:location.href = '/weather'" class="btn btn-success">Weather</button>
+            <button onclick="javascript:location.href = '/logout'" class="btn btn-success">Wyloguj mnie</button>
+        </div>
+    </div>
+</body>
+</html>
