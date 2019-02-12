@@ -32,14 +32,17 @@ public class WeatherController {
         return "weather";
     }
 
-
     @PostMapping("/weather")
     public String index(@RequestParam("cityName") String cityName,
                         Model model) {
         model.addAttribute("userObject", sessionService);
-
-        model.addAttribute("weather", weatherLogService.getCurrentWeather(cityName));
-        model.addAttribute("forecast", weatherLogService.getForecastWeather(cityName));
+//        model.addAttribute("weather", weatherLogService.getCurrentWeather(cityName));
+//        model.addAttribute("forecast", weatherLogService.getForecastWeather(cityName));
         return "weather";
     }
+
+
 }
+
+
+

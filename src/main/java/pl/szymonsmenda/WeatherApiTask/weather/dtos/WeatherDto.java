@@ -3,9 +3,11 @@ package pl.szymonsmenda.WeatherApiTask.weather.dtos;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class WeatherDto {
-    private TemperatureDto main;
+    private List<TemperatureDto> main;
     private CloudsDto clouds;
     private WindDto wind;
 
@@ -15,6 +17,7 @@ public class WeatherDto {
 
     @JsonProperty("dt_txt")
     private String date;
+
 
     @Data
     public static class TemperatureDto {

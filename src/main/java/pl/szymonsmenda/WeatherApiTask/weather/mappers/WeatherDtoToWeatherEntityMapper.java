@@ -11,10 +11,10 @@ public class WeatherDtoToWeatherEntityMapper {
         WeatherLogEntity weatherLogEntity = new WeatherLogEntity();
         weatherLogEntity.setCityName(weatherDto.getCityName());
         weatherLogEntity.setQueryTime(LocalDateTime.now()); // czas aktualny
-        weatherLogEntity.setCityTemp(weatherDto.getMain().getTemp());
-        weatherLogEntity.setCityPressure(weatherDto.getMain().getPressure());
-        weatherLogEntity.setCityWindSpeed(weatherDto.getWind().getSpeed());
-        weatherLogEntity.setCityHumidity(weatherDto.getMain().getHumidity());
+//        weatherLogEntity.setCityTemp(weatherDto.getMain().getTemp());
+//        weatherLogEntity.setCityPressure(weatherDto.getMain().getPressure());
+//        weatherLogEntity.setCityWindSpeed(weatherDto.getWind().getSpeed());
+//        weatherLogEntity.setCityHumidity(weatherDto.getMain().getHumidity());
 
         return weatherLogEntity;
     }

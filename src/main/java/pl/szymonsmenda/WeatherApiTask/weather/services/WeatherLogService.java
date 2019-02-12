@@ -33,18 +33,18 @@ public class WeatherLogService {
         return weatherLogRepository.save(weatherLogEntity) != null;
     }
 
-    public WeatherDto getCurrentWeather(String cityName) {
-        RestTemplate restTemplate = getRestTemplate();
-        WeatherDto weatherDto = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=metric&appid=" + apiKey, WeatherDto.class);
-
-        saveWeatherLog(weatherDto);
-        return weatherDto;
-    }
-
-    public ForecastWeatherDto getForecastWeather(String cityName) {
-        RestTemplate restTemplate = getRestTemplate();
-        return restTemplate.getForObject("http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=metric&appid=" + apiKey, ForecastWeatherDto.class);
-    }
+//    public WeatherDto getCurrentWeather(String cityName) {
+//        RestTemplate restTemplate = getRestTemplate();
+//        WeatherDto weatherDto = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=metric&appid=" + apiKey, WeatherDto.class);
+//
+//        saveWeatherLog(weatherDto);
+//        return weatherDto;
+//    }
+//
+//    public ForecastWeatherDto getForecastWeather(String cityName) {
+//        RestTemplate restTemplate = getRestTemplate();
+//        return restTemplate.getForObject("http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=metric&appid=" + apiKey, ForecastWeatherDto.class);
+//    }
 
     public WeatherLogEntity getWeatherData(String cityName) {
 
@@ -56,10 +56,10 @@ public class WeatherLogService {
 //
 //        return weatherLogRepository.findAllByCityName();
 //    }
-
-
-    @Bean
-    public RestTemplate getRestTemplate() {
-        return new RestTemplate();
-    }
+//
+//
+//    @Bean
+//    public RestTemplate getRestTemplate() {
+//        return new RestTemplate();
+//    }
 }
