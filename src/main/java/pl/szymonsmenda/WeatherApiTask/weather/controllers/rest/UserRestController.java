@@ -7,16 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import pl.szymonsmenda.WeatherApiTask.weather.services.AuthService;
 
 
-@RestController
-@RequestMapping("rest")
-public class UserRestController {
-
-    final AuthService authService;
-
+@RequestMapping("data")
+public class UserRestController implements RestController {
     @Autowired
-    public UserRestController(AuthService authService) {
-        this.authService = authService;
-    }
+    private AuthService authService;
 
 
     @GetMapping(value = "/user/{email}/{password}", consumes = "application/json")

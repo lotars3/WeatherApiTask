@@ -8,23 +8,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.szymonsmenda.WeatherApiTask.weather.forms.RegisterForm;
+import pl.szymonsmenda.WeatherApiTask.weather.entites.RegisterForm;
 import pl.szymonsmenda.WeatherApiTask.weather.services.AuthService;
 import pl.szymonsmenda.WeatherApiTask.weather.services.SessionService;
 
 
 @Controller
 public class AuthController {
-
-    final AuthService authService;
-
-    final SessionService sessionService;
-
     @Autowired
-    public AuthController(AuthService authService, SessionService sessionService) {
-        this.authService = authService;
-        this.sessionService = sessionService;
-    }
+    private AuthService authService;
+    @Autowired
+    private SessionService sessionService;
 
 
     @GetMapping("/login")
@@ -36,7 +30,7 @@ public class AuthController {
     public String login(@RequestParam("email") String email,
                         @RequestParam("password") String password,
                         Model model) {
-        if (!authService.tryLogin(email, password)) {
+        if (!authService.isLogged(email, password)) {
             model.addAttribute("infoAboutLogin", "Nieprawidłowy login lub hasło");
             return "login";
         }
@@ -53,7 +47,7 @@ public class AuthController {
     @PostMapping("/register")
     public String register(@ModelAttribute("registerForm") RegisterForm registerForm,
                            Model model) {
-        if (!authService.tryToRegister(registerForm)) {
+        if (!authService.isRegistered(registerForm)) {
             model.addAttribute("infoAboutRegister", "Email zajęty");
             return "register";
         }

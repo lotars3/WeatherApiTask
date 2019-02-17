@@ -8,36 +8,51 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import pl.szymonsmenda.WeatherApiTask.weather.dtos.ForecastWeatherDto;
 import pl.szymonsmenda.WeatherApiTask.weather.dtos.WeatherDto;
+import pl.szymonsmenda.WeatherApiTask.weather.entites.CityEntity;
 import pl.szymonsmenda.WeatherApiTask.weather.entites.WeatherLogEntity;
 import pl.szymonsmenda.WeatherApiTask.weather.mappers.WeatherDtoToWeatherEntityMapper;
+import pl.szymonsmenda.WeatherApiTask.weather.repositories.CityRepository;
 import pl.szymonsmenda.WeatherApiTask.weather.repositories.WeatherLogRepository;
+
+import java.util.List;
 
 
 @Service
 public class WeatherLogService {
 
+    @Autowired
+    private WeatherLogRepository weatherLogRepository;
+    @Autowired
+    private CityRepository cityRepository;
+
+
 
     @Value("${api.openweathermap.key}")
     String apiKey;
 
+    public static final String URL_TO_API = "http://api.openweathermap.org/data/2.5/weather?q=";
 
-    final WeatherLogRepository weatherLogRepository;
 
-    @Autowired
-    public WeatherLogService(WeatherLogRepository weatherLogRepository) {
-        this.weatherLogRepository = weatherLogRepository;
-    }
 
-    public boolean saveWeatherLog(WeatherDto weatherDto) {
+
+    public boolean isWeatherLogSaved(WeatherDto weatherDto) {
         WeatherLogEntity weatherLogEntity = WeatherDtoToWeatherEntityMapper.convert(weatherDto);
-        return weatherLogRepository.save(weatherLogEntity) != null;
+//        CityEntity cityLogEntity = WeatherDtoToWeatherEntityMapper.convert(cityDto);
+        return weatherLogRepository.save(weatherLogEntity) != null; //&&(cityRepository.save(cityLogEntity) !=null) ;
     }
+
+//    public List<WeatherLogEntity> findCityName(String cityName ){
+//        CityEntity cityEntity = cityRepository.findByCityName(cityName);
+//        return weatherLogRepository.findByCity(cityEntity);
+//    }
 
     public WeatherDto getCurrentWeather(String cityName) {
+//        findCityName(cityName);
         RestTemplate restTemplate = getRestTemplate();
-        WeatherDto weatherDto = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=metric&appid=" + apiKey, WeatherDto.class);
+        WeatherDto weatherDto = restTemplate.getForObject(URL_TO_API + cityName + "&units=metric&appid=" + apiKey, WeatherDto.class);
+//        CityDto cityDto = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=metric&appid=" + apiKey, CityDto.class);
 
-        saveWeatherLog(weatherDto);
+        isWeatherLogSaved(weatherDto);
         return weatherDto;
     }
 
@@ -46,16 +61,12 @@ public class WeatherLogService {
         return restTemplate.getForObject("http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=metric&appid=" + apiKey, ForecastWeatherDto.class);
     }
 
-    public WeatherLogEntity getWeatherData(String cityName) {
+    public CityEntity findCityName(String cityName) {
 
-        return weatherLogRepository.findByCityName(cityName);
-//        return weatherLogRepository.findById(id).get();
+        return cityRepository.findByCityName(cityName);
     }
 
-//    public WeatherLogEntity getAllCity() {
-//
-//        return weatherLogRepository.findAllByCityName();
-//    }
+
 
 
     @Bean

@@ -10,9 +10,6 @@ public class WeatherDto {
     private WindDto wind;
 
 
-    @JsonProperty("name")
-    private String cityName;
-
     @JsonProperty("dt_txt")
     private String date;
 
@@ -38,7 +35,6 @@ public class WeatherDto {
         @JsonProperty(value = "all")
         private int clouds;
     }
-
 
 
 }

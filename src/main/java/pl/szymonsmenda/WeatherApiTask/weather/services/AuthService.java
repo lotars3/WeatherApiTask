@@ -3,7 +3,7 @@ package pl.szymonsmenda.WeatherApiTask.weather.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.szymonsmenda.WeatherApiTask.weather.entites.UserEntity;
-import pl.szymonsmenda.WeatherApiTask.weather.forms.RegisterForm;
+import pl.szymonsmenda.WeatherApiTask.weather.entites.RegisterForm;
 import pl.szymonsmenda.WeatherApiTask.weather.repositories.UserRepository;
 
 
@@ -11,17 +11,14 @@ import java.util.Optional;
 
 @Service
 public class AuthService {
-    final UserRepository userRepository;
-    final SessionService sessionService;
-
-
     @Autowired
-    public AuthService(UserRepository userRepository, SessionService sessionService) {
-        this.userRepository = userRepository;
-        this.sessionService = sessionService;
-    }
+    private UserRepository userRepository;
+    @Autowired
+    private SessionService sessionService;
 
-    public boolean tryLogin(String email, String password){
+
+
+    public boolean isLogged(String email, String password){
         Optional<UserEntity> userEntity
                 = userRepository.findByEmailAndPassword(email, password);
         if(userEntity.isPresent()){
@@ -31,7 +28,7 @@ public class AuthService {
         return userEntity.isPresent();
     }
 
-    public boolean tryToRegister(RegisterForm registerForm){
+    public boolean isRegistered(RegisterForm registerForm){
         if(userRepository.existsByEmail(registerForm.getEmail())){
             return false;
         }

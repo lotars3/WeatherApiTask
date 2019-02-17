@@ -1,4 +1,4 @@
-package pl.szymonsmenda.WeatherApiTask.weather.forms;
+package pl.szymonsmenda.WeatherApiTask.weather.entites;
 
 import lombok.Data;
 

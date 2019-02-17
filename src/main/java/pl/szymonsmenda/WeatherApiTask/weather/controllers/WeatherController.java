@@ -12,15 +12,12 @@ import pl.szymonsmenda.WeatherApiTask.weather.services.WeatherLogService;
 
 @Controller
 public class WeatherController {
-
-    final private WeatherLogService weatherLogService;
-    final SessionService sessionService;
-
     @Autowired
-    public WeatherController(WeatherLogService weatherLogService, SessionService sessionService) {
-        this.weatherLogService = weatherLogService;
-        this.sessionService = sessionService;
-    }
+    private WeatherLogService weatherLogService;
+    @Autowired
+    private SessionService sessionService;
+
+
 
     @GetMapping("/weather")
     public String index(Model model) {
@@ -28,11 +25,8 @@ public class WeatherController {
         if (!sessionService.isLogin()) {
             return "redirect:/login";
         }
-
         return "weather";
     }
-
-
     @PostMapping("/weather")
     public String index(@RequestParam("cityName") String cityName,
                         Model model) {
@@ -42,4 +36,6 @@ public class WeatherController {
         model.addAttribute("forecast", weatherLogService.getForecastWeather(cityName));
         return "weather";
     }
+
+
 }
