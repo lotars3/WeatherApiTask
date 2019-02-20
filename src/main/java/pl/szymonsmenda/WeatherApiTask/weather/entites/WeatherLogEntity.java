@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "weather_log")
+@Table(name = "weather")
 public class WeatherLogEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

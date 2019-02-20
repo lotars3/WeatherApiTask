@@ -1,5 +1,6 @@
 package pl.szymonsmenda.WeatherApiTask.weather.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -22,14 +23,11 @@ public class CityEntity {
     private String cityName;
 
 
-
-
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,
             mappedBy = "citys")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Set<WeatherLogEntity> weathers ;
-
+    private Set<WeatherLogEntity> weathers;
 
 
 }
