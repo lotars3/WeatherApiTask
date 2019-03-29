@@ -29,14 +29,4 @@ public class WeatherLogEntity {
     LocalDateTime queryTime;
 
 
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "city_weathers",
-            joinColumns = {@JoinColumn(name = "city_id")},
-            inverseJoinColumns = {@JoinColumn(name = "weather_id")}
-    )
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private Set<CityEntity> citys;
-
 }

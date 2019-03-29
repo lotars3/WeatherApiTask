@@ -23,8 +23,11 @@ public class CityEntity {
     private String cityName;
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,
-            mappedBy = "citys")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "city_weathers",
+            joinColumns = {@JoinColumn(name = "city_id")},
+            inverseJoinColumns = {@JoinColumn(name = "weather_id")}
+    )
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Set<WeatherLogEntity> weathers;
